@@ -12,7 +12,6 @@
     Connect Wallet
 </WalletMultiButton>
 
-<!-- Important for wallet adapter to work in prod -->
 <script>
     import { browser } from '$app/env';
 
@@ -46,6 +45,7 @@
     const localStorageKey = "walletAdapter";
     const network = clusterApiUrl("mainnet-beta");
 
+    // Important for wallet provider to work in prod.
     onMount(() => {
         if(browser) {
             window.Buffer = Buffer;
