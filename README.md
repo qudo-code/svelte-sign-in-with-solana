@@ -11,7 +11,7 @@ Example implementation of "Sign in With Solana" using SvelteKit.
 From here, if the verification is successful, the backend could do something like prepare a JWT to send back to the user.
 
 ## Demo
-[View Example UI]()
+[View Example UI](https://svelte-sign-in-with-solana.vercel.app/)
 
 ## Run
 - Have Node installed
