@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"build": "npm run write-env && vite build",
+		"build": "vite build",
 		"start": "node build/index.js",
 		"dev": "vite dev"
 	},
