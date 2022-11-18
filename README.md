@@ -1,5 +1,6 @@
-# SvelteKit Sign in With Solana
+![banner](/doc/banner.png)
 
+# SvelteKit Sign in With Solana
 Example implementation of "Sign in With Solana" using SvelteKit.
 
 ## How it Works
