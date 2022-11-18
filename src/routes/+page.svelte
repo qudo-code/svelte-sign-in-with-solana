@@ -1,10 +1,3 @@
-<WalletProvider {localStorageKey} {wallets} autoConnect={false} />
-<ConnectionProvider {network} />
-
-<WalletMultiButton>
-    Connect Wallet
-</WalletMultiButton>
-
 <h1>Logs</h1>
 
 <pre>
@@ -17,26 +10,8 @@
 
 <script lang="ts">
     import bs58 from "bs58";
-    import { Buffer } from "buffer";
 
     import { walletStore } from '@svelte-on-solana/wallet-adapter-core';
-
-    import { clusterApiUrl } from '@solana/web3.js';
-
-    import {
-        workSpace,
-        WalletProvider,
-        ConnectionProvider,
-        WalletMultiButton,
-    } from "@svelte-on-solana/wallet-adapter-ui";
-
-    import {
-        PhantomWalletAdapter,
-        BackpackWalletAdapter,
-        LedgerWalletAdapter,
-        SolflareWalletAdapter,
-        SolletExtensionWalletAdapter,
-    } from "@solana/wallet-adapter-wallets";
     
     import { onMount } from "svelte";
     import { browser } from "$app/env";
@@ -44,17 +19,6 @@
     let logs:Array<string> = [];
     let isVerifying = false;
     let verified = false;
-
-    const wallets = [
-        new PhantomWalletAdapter(),
-        new BackpackWalletAdapter(),
-        new SolflareWalletAdapter(),
-        new SolletExtensionWalletAdapter(),
-        new LedgerWalletAdapter(),
-    ];
-
-    const localStorageKey = "walletAdapter";
-    const network = clusterApiUrl("mainnet-beta");
 
     const getMessage = async () => {
         const response = await fetch("/api/solana/message");
@@ -76,7 +40,7 @@
 
         const encodedMessage = new TextEncoder().encode(message);
 
-        if(!$walletStore?.signMessage) {
+        if(!$walletStore.signMessage) {
             logs = [
                 ...logs,
                 `\n\n\nWallet not supported`
@@ -149,12 +113,6 @@
     }
     
     onMount(async () => {
-        // https://github.com/algorand/js-algorand-sdk/issues/398
-        // This can also be handled in the build config but putting it here for visibility.
-        if (browser) {
-            window.Buffer = Buffer;
-        }
-        
         logs = [
             ...logs,
             "\n\n\nApp is ready"

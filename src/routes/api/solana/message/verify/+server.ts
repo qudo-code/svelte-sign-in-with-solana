@@ -10,7 +10,6 @@ const {
     ENV_TOTP_SECRET
 } = env;
 
-
 export async function POST({ params, locals, request }: RequestEvent) {
     const {
         message = "",
