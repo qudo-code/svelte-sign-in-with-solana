@@ -1,0 +1,25 @@
+{
+  "editor.tabSize": 4,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "svelte"
+  ],
+  "editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": true,
+		"source.fixAll.eslint": true,
+  },
+  "cSpell.words": [
+    "deez",
+    "MATR",
+    "qudo",
+    "solana",
+    "stylelint",
+    "sveltejs",
+    "sveltekit",
+    "tivac",
+    "TOTP",
+    "uuidv"
+  ],
+}
