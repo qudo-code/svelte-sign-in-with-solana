@@ -16,9 +16,6 @@ const config = {
         alias : {
             src : "./src",
         },
-        env : {
-            publicPrefix : "MATR_",
-        },
     },
 };
 

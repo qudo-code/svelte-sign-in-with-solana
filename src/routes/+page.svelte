@@ -17,6 +17,7 @@
 
 <script lang="ts">
     import bs58 from "bs58";
+    import { Buffer } from "buffer";
 
     import { walletStore } from '@svelte-on-solana/wallet-adapter-core';
 
@@ -38,6 +39,7 @@
     } from "@solana/wallet-adapter-wallets";
     
     import { onMount } from "svelte";
+    import { browser } from "$app/env";
 
     let logs:Array<string> = [];
     let isVerifying = false;
@@ -146,7 +148,13 @@
         verified = true;
     }
     
-    onMount(() => {
+    onMount(async () => {
+        // https://github.com/algorand/js-algorand-sdk/issues/398
+        // This can also be handled in the build config but putting it here for visibility.
+        if (browser) {
+            window.Buffer = Buffer;
+        }
+        
         logs = [
             ...logs,
             "\n\n\nApp is ready"
