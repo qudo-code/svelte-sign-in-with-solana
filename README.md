@@ -19,5 +19,8 @@ From here, if the verification is successful, the backend could do something lik
 - Add a `.env` file to the root of this project and add a TOTP secret like `ENV_TOTP_SECRET=12312312`. Both endpoints use this value to create and verify the time sensitive code. 
 - `npm run dev` to start the project locally.
 
+## Other Config
+There are a couple non intuitive config things I had to do in order to polyfill `Buffer`. See `vite.config.js` and `+layout.svelte` for implementing a browser version of `Buffer.
+
 ## Help
 Tweet at me [@_qudo](https://twitter.com/_qudo)
