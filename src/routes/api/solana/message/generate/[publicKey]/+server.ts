@@ -26,6 +26,11 @@ export async function GET({ params }: RequestEvent) {
         encoding : "base32",
     });
 
+    // Remove any stale/previous
+    await AuthRequestModel.deleteMany({
+        publicKey: params.publicKey
+    });
+
     const authRequest = new AuthRequestModel({
         uuid,
         totp,

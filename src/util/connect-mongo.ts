@@ -9,7 +9,6 @@ const {
 } = env;
 
 export default async () => {
-    console.log({ENV_MONGO})
     // Connect with existing connection.
     if(Number(mongoose?.connection?.readyState) === 1) {
         return mongoose.connection;
