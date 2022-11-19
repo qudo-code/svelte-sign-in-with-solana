@@ -6,16 +6,27 @@ import bs58 from 'bs58'
 
 import { env } from "$env/dynamic/private";
 
+import {
+    AuthRequestModel,
+} from "src/models";
+
 const {
     ENV_TOTP_SECRET
 } = env;
 
 export async function POST({ params, locals, request }: RequestEvent) {
     const {
-        message = "",
         publicKey = "",
         signature = "",
+        message = ""
     } = await request.json();
+
+    const extractedTOTP = message.substring(message.length - 6, message.length);
+
+    const authRequest = await AuthRequestModel.findOne({
+        totp : extractedTOTP,
+        publicKey,
+    });
 
     const verifiedMessage = nacl
         .sign
@@ -26,10 +37,10 @@ export async function POST({ params, locals, request }: RequestEvent) {
             bs58.decode(publicKey)
         );
 
-    const extractedTOTP = message.substring(message.length - 6, message.length);
- 
+    console.log(authRequest?.uuid + publicKey)
+
     const verifiedTOTP = speakeasy.totp.verify({
-        secret   : ENV_TOTP_SECRET,
+        secret   : authRequest?.uuid + publicKey,
         encoding : "base32",
         token: extractedTOTP
     });
@@ -41,6 +52,8 @@ export async function POST({ params, locals, request }: RequestEvent) {
     if(!verifiedMessage) {
         throw new Error("Invalid message");
     }
+
+    await AuthRequestModel.findByIdAndDelete(authRequest?._id)
 
     return json({});
 }

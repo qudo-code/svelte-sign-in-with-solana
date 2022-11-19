@@ -16,8 +16,8 @@ Connect to a database of your choice to ensure the best security. You'll probabl
 #### Generate JWT
 Once verified, you could do something like look up the user by Public Key and generate a JWT to send back to the client.
 
-#### Handle Duplicate Nonces
-You should log nones in a database so you can check for ones that are already used. You will also have to make an addition to the /verify endpoint with logic to determine "already exits".
+#### Handle Duplicate Signatures
+You should log already signatures in a database and check for duplicates.
 
 ## Demo
 [View Example UI](https://svelte-sign-in-with-solana.vercel.app/)

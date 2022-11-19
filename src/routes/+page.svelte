@@ -9,21 +9,30 @@
 </pre>
 
 <script lang="ts">
+    import { browser } from "$app/env";
     import bs58 from "bs58";
 
     import { walletStore } from '@svelte-on-solana/wallet-adapter-core';
     
     import { onMount } from "svelte";
-    import { browser } from "$app/env";
 
     let logs:Array<string> = [];
     let isVerifying = false;
     let verified = false;
 
     const getMessage = async () => {
-        const response = await fetch("/api/solana/message");
+        const response = await fetch(`/api/solana/message/generate/${$walletStore.publicKey?.toBase58()}`);
         
         const { data : message } = await response.json();
+
+        if(response.status !== 200) {
+            logs = [
+                ...logs,
+                `\n\n\nGet message failed`
+            ];
+
+            return;
+        }
 
         logs = [
             ...logs,
@@ -37,6 +46,10 @@
         isVerifying = true;
 
         const message = await getMessage();
+
+        if(!message) {
+
+        }
 
         const encodedMessage = new TextEncoder().encode(message);
 
