@@ -2,6 +2,7 @@
 
 #### 🚨 Security Notice
 This is a POC to show high level patterns. You should generate more secure one time use messages if using this in production.
+[See WIP Database Integration](https://github.com/qudo-code/svelte-sign-in-with-solana/tree/feat/database-integration).
 
 # SvelteKit Sign in With Solana
 Example implementation of "Sign in With Solana" using SvelteKit.
