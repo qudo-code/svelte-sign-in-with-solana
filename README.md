@@ -1,7 +1,7 @@
 ![banner](/doc/banner.png)
 
 #### 🚨 Security Notice
-This is a POC to show high level patterns. You should generate more sucure one time use messages if using this in prod.
+This is a POC to show high level patterns. You should generate more secure one time use messages if using this in production.
 
 # SvelteKit Sign in With Solana
 Example implementation of "Sign in With Solana" using SvelteKit.
