@@ -4,17 +4,11 @@ import speakeasy from "speakeasy";
 import nacl from 'tweetnacl'
 import bs58 from 'bs58'
 
-import { env } from "$env/dynamic/private";
-
 import {
     AuthRequestModel,
 } from "src/models";
 
-const {
-    ENV_TOTP_SECRET
-} = env;
-
-export async function POST({ params, locals, request }: RequestEvent) {
+export async function POST({ request }: RequestEvent) {
     const {
         publicKey = "",
         signature = "",
@@ -36,14 +30,14 @@ export async function POST({ params, locals, request }: RequestEvent) {
             bs58.decode(signature),
             bs58.decode(publicKey)
         );
-
-    console.log(authRequest?.uuid + publicKey)
-
-    const verifiedTOTP = speakeasy.totp.verify({
-        secret   : authRequest?.uuid + publicKey,
-        encoding : "base32",
-        token: extractedTOTP
-    });
+        
+    const verifiedTOTP = speakeasy
+        .totp
+        .verify({
+            secret   : authRequest?.uuid + publicKey,
+            encoding : "base32",
+            token: extractedTOTP
+        });
 
     if(!verifiedTOTP) {
         throw new Error("Invalid TOTP");
